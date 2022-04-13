@@ -63,6 +63,10 @@ class prediction:
             if os.path.isdir(path.rsplit("/", maxsplit = 1)[0]):
                 result.to_csv("Prediction_Output_File/Predictions.csv",header=True) #appends result to prediction file
                 self.log_writer.log(self.file_object,'End of Prediction')
+            else:
+                os.mkdir(path.rsplit("/", maxsplit = 1)[0])
+                result.to_csv("Prediction_Output_File/Predictions.csv",header=True)  # appends result to prediction file
+                self.log_writer.log(self.file_object, 'End of Prediction')
         except Exception as ex:
             self.log_writer.log(self.file_object, 'Error occured while running the prediction!! Error:: %s' % ex)
             raise ex

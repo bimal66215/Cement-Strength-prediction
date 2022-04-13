@@ -1,4 +1,5 @@
 import pandas
+import os.path
 from file_operations import file_methods
 from data_preprocessing import preprocessing
 from data_ingestion import data_loader_prediction
@@ -59,8 +60,9 @@ class prediction:
                     result.append(val)
             result = pandas.DataFrame(result,columns=['Predictions'])
             path="Prediction_Output_File/Predictions.csv"
-            result.to_csv("Prediction_Output_File/Predictions.csv",header=True) #appends result to prediction file
-            self.log_writer.log(self.file_object,'End of Prediction')
+            if os.path.isdir(path.rsplit("/", maxsplit = 1)[0]):
+                result.to_csv("Prediction_Output_File/Predictions.csv",header=True) #appends result to prediction file
+                self.log_writer.log(self.file_object,'End of Prediction')
         except Exception as ex:
             self.log_writer.log(self.file_object, 'Error occured while running the prediction!! Error:: %s' % ex)
             raise ex

@@ -1,20 +1,21 @@
 steps:
   # Install dependencies
-  - name: python
+ - name: python
     entrypoint: pip
     args: ["install", "-r", "requirements.txt", "--user"]
 # Building docker image and pushing to Container registry
-  - name: 'gcr.io/cloud-builders/docker'
+ - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build', '-t', 'gcr.io/cement123/cement_image', '.' ]
-  - name: 'gcr.io/cloud-builders/docker'
+ - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/cement123/cement_image']
   images: ['gcr.io/cement123/cement_image']
 # Deploy to Cloud Run
-  - name: google/cloud-sdk
+ - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
            '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}', 
            '--region', 'us-central1', '--platform', 'managed', 
            '--allow-unauthenticated']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-  
+options:
+ logging: GCS_ONLY

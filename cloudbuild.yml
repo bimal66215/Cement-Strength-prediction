@@ -19,3 +19,15 @@ steps:
     entrypoint: gcloud
 options:
  logging: GCS_ONLY
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   entrypoint: gcloud
+   args:
+   - 'run'
+   - 'deploy'
+   - 'cement-strength-prediction'
+   - '--image'
+   - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'
+   - '--region'
+   - 'asia-south1'
+ images:
+ - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'

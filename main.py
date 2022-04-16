@@ -46,7 +46,6 @@ def predictRouteClient():
             path, result = pred.predictionFromModel()
 
             df = result.copy()
-            # return render_template(df.to_html())
 
             return Response("Prediction File created at %s!!!" % path)
 
@@ -64,7 +63,6 @@ def predictRouteClient():
             path, result = pred.predictionFromModel()
 
             df = result.copy()
-            # return render_template(df.to_html())
 
             return Response("Prediction File created at %s!!!" % path)
 

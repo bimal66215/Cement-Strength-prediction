@@ -22,3 +22,6 @@
 2022-04-16/23:34:18		Column Length Validation Started!!
 2022-04-16/23:34:18		Invalid Column Length for the file!! File moved to Bad Raw Folder :: cement_strength_08012020_120000.csv
 2022-04-16/23:34:18		Column Length Validation Completed!!
+2022-04-17/00:41:24		Column Length Validation Started!!
+2022-04-17/00:41:24		Invalid Column Length for the file!! File moved to Bad Raw Folder :: cement_strength_08012020_120000.csv
+2022-04-17/00:41:24		Column Length Validation Completed!!

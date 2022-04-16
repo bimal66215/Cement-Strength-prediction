@@ -168,18 +168,7 @@ To build and deploy a container image:
 2. In the build config file, add docker build steps to build the image and push it to Container Registry, and then add a gcloud build step to invoke the gcloud run deploy command to deploy the image on Cloud Run:
 Add the below code to the cloudbuild.yml
 steps:
-# Build the container image
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/PROJECT_ID/IMAGE', '.']
-# Push the container image to Container Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/PROJECT_ID/IMAGE']
-# Deploy container image to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/PROJECT_ID/IMAGE', '--region', 'REGION']
-images:
-- gcr.io/PROJECT_ID/IMAGE
+![img.png](images/img7.png)
 
 ![img_5.png](images/img_5.png)
 

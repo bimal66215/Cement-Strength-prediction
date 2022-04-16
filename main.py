@@ -1,4 +1,6 @@
 from wsgiref import simple_server
+
+import pandas as pd
 from flask import Flask, request, render_template
 from flask import Response
 import os
@@ -8,6 +10,8 @@ from trainingModel import trainModel
 from training_Validation_Insertion import train_validation
 import flask_monitoringdashboard as dashboard
 from predictFromModel import prediction
+
+
 
 os.putenv('LANG', 'en_US.UTF-8')
 os.putenv('LC_ALL', 'en_US.UTF-8')
@@ -22,9 +26,11 @@ CORS(app)
 def home():
     return render_template('index.html')
 
+df = pd.DataFrame()
 @app.route("/predict", methods=['POST'])
 @cross_origin()
 def predictRouteClient():
+    global df
     try:
         if request.json is not None:
             path = request.json['filepath']
@@ -36,19 +42,30 @@ def predictRouteClient():
             pred = prediction(path) #object initialization
 
             # predicting for dataset present in database
-            path = pred.predictionFromModel()
+
+            path, result = pred.predictionFromModel()
+
+            df = result.copy()
+            # return render_template(df.to_html())
+
             return Response("Prediction File created at %s!!!" % path)
+
+
         elif request.form is not None:
             path = request.form['filepath']
 
             pred_val = pred_validation(path) #object initialization
 
-            #pred_val.prediction_validation() #calling the prediction_validation function
+            pred_val.prediction_validation() #calling the prediction_validation function
 
             pred = prediction(path) #object initialization
 
             # predicting for dataset present in database
-            path = pred.predictionFromModel()
+            path, result = pred.predictionFromModel()
+
+            df = result.copy()
+            # return render_template(df.to_html())
+
             return Response("Prediction File created at %s!!!" % path)
 
     except ValueError:
@@ -88,6 +105,16 @@ def trainRouteClient():
 
         return Response("Error Occurred! %s" % e)
     return Response("Training successfull!!")
+
+@app.route("/view", methods=['GET', 'POST'])
+@cross_origin()
+def view_result():
+    try:
+        return df.to_html()
+
+    except Exception as e:
+        return Response("Error Occurred! %s" % e)
+
 
 port = int(os.getenv("PORT",5001))
 if __name__ == "__main__":

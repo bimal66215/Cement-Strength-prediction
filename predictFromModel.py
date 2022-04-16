@@ -58,19 +58,21 @@ class prediction:
                 model = file_loader.load_model(model_name)
                 for val in (model.predict(cluster_data.values)):
                     result.append(val)
-            result = pandas.DataFrame(result,columns=['Predictions'])
+            # result_df = pandas.DataFrame(result,columns=['Predictions'])
+            cluster_data["Predictions"] = result
+            result_df = cluster_data
             path="Prediction_Output_File/Predictions.csv"
             if os.path.isdir(path.rsplit("/", maxsplit = 1)[0]):
-                result.to_csv("Prediction_Output_File/Predictions.csv",header=True) #appends result to prediction file
+                result_df.to_csv("Prediction_Output_File/Predictions.csv",header=True) #appends result to prediction file
                 self.log_writer.log(self.file_object,'End of Prediction')
             else:
                 os.mkdir(path.rsplit("/", maxsplit = 1)[0])
-                result.to_csv("Prediction_Output_File/Predictions.csv",header=True)  # appends result to prediction file
+                result_df.to_csv("Prediction_Output_File/Predictions.csv",header=True)  # appends result to prediction file
                 self.log_writer.log(self.file_object, 'End of Prediction')
         except Exception as ex:
             self.log_writer.log(self.file_object, 'Error occured while running the prediction!! Error:: %s' % ex)
             raise ex
-        return path
+        return path, result_df
 
             # old code
             # i=0

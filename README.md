@@ -183,3 +183,6 @@ steps:
 4. Click on the marked URL for the project page:
 
 ![img_6.png](images/img_6.png)
+
+
+Thank you 

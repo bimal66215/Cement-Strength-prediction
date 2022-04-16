@@ -89,7 +89,7 @@ In this step, we perform different sets of validation on the given set of traini
  
 **Deployment******
 
-We will be deploying the model to the Pivotal Web Services Platform. 
+We will be deploying the model to the Google Cloud Platform. 
 This is a workflow diagram for the prediction of using the trained model.                  
                                                       
 
@@ -111,105 +111,86 @@ This is the predictionFromModel.py file where the predictions take place based o
  
  ![image](https://user-images.githubusercontent.com/82671006/162594886-d054e37b-7d79-461a-88b0-124ebd5b1d8d.png)
 
-manifest.yml:- This file contains the instance configuration, app name, and build pack language.
+[comment]: <> (manifest.yml:- This file contains the instance configuration, app name, and build pack language.)
 
-![image](https://user-images.githubusercontent.com/82671006/162594889-be0c52da-1ff3-4e44-bc12-775677d8640f.png)
+[comment]: <> (![image]&#40;https://user-images.githubusercontent.com/82671006/162594889-be0c52da-1ff3-4e44-bc12-775677d8640f.png&#41;)
 
  
-Procfile :- It contains the entry point of the app.
+[comment]: <> (Procfile :- It contains the entry point of the app.)
 
- ![image](https://user-images.githubusercontent.com/82671006/162594893-7eb95d75-f5da-4b24-bac6-20448d1d0657.png)
+[comment]: <> ( ![image]&#40;https://user-images.githubusercontent.com/82671006/162594893-7eb95d75-f5da-4b24-bac6-20448d1d0657.png&#41;)
 
 runtime.txt:- It contains the Python version number.
 
-_Visit the official website https://pivotal.io/platform._
- 
- ![image](https://user-images.githubusercontent.com/82671006/162594916-185d04b9-4c43-4ff5-9324-23fb72819d9d.png)
-
-Scroll Down to see the Start Trial Button
-
-
-![image](https://user-images.githubusercontent.com/82671006/162594922-e9fe0750-9d07-4db2-aa97-94df8a5926b8.png)
-
- 
-Click on the start trial button and the next interface will open. Then I will click on I’m ready to continue
-
-![image](https://user-images.githubusercontent.com/82671006/162594955-52cfb28d-a89b-4144-808d-1112e4d6d32a.png)
-
-Click on Download for Windows 64 bit, and then zip file will be downloaded. Keep it for future uses.
-
-![image](https://user-images.githubusercontent.com/82671006/162594981-e4438b73-cfe7-45b8-b52b-50a2e269bce4.png)
-
-Now click on Let’s Keep Going
-
-![image](https://user-images.githubusercontent.com/82671006/162594992-ec7654ad-99f8-42eb-beb5-8a73c941463d.png)
-
-Click on Create Your Account
-
-![image](https://user-images.githubusercontent.com/82671006/162594997-21ffa876-9383-473b-937e-c0eeb17beaaa.png)
-
-Fill Up your Details For registration
-Do the email verification
-Then login in again
-
 ![image](https://user-images.githubusercontent.com/82671006/162595005-408bca5a-c49d-4700-b8ea-857e72016345.png)
 
+Before we begin, Enable the Cloud Build, Cloud Run, Container Registry, and Resource Manager APIs using the below link.
+
+![API](https://console.cloud.google.com/flows/enableapi?apiid=cloudbuild.googleapis.com,run.googleapis.com,containerregistry.googleapis.com,cloudresourcemanager.googleapis.com&redirect=https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run&_ga=2.81965782.1537123792.1650092035-801238435.1649706278&_gac=1.123866872.1649858458.CjwKCAjwo8-SBhAlEiwAopc9W4BMLp_N90y_KmQaOjfv-L-4gT4WmPlZmenfKocAmQb-wMc_CKQKMhoClKEQAvD_BwE)
+
+Open Cloud Source Repositories from the menu on left 
+
+![img.png](images/img.png)
+
+Click on Add Repository
+
+![img_1.png](images/img_1.png)
+
+Select the options like in the image below to mirror or Git Repo
+
+![img_2.png](images/img_2.png)
+
+Select the project from the drop down and use Git as the provider and connect to GitHub
+
+![img_3.png](images/img_3.png)
+
+
+Providing IAM permissions:
+
+To deploy to Cloud Run grant the Cloud Run Admin and Service Account User roles to the Cloud Build service account:
+
+1. Open the Cloud Build settings page in the Cloud Console:
+![Cloud build settings](https://console.cloud.google.com/cloud-build/settings?_ga=2.10542708.1537123792.1650092035-801238435.1649706278&_gac=1.160582095.1649858458.CjwKCAjwo8-SBhAlEiwAopc9W4BMLp_N90y_KmQaOjfv-L-4gT4WmPlZmenfKocAmQb-wMc_CKQKMhoClKEQAvD_BwE)
+
+2. In the Service account permissions panel, set the status of the Cloud Run Admin role to ENABLED:
+![img_4.png](images/img_4.png)
+
+3. In the Additional steps may be required pop-up, click GRANT ACCESS TO ALL SERVICE ACCOUNTS.
+
+Building and deploying a container-
+
+Cloud Build enables you to build the container image, store the built image in Container Registry, and then deploy the image to Cloud Run.
+
+To build and deploy a container image:
+
+1. In your project root directory, create a config file named cloudbuild.yaml.
+
+2. In the build config file, add docker build steps to build the image and push it to Container Registry, and then add a gcloud build step to invoke the gcloud run deploy command to deploy the image on Cloud Run:
+Add the below code to the cloudbuild.yml
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/PROJECT_ID/IMAGE', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/PROJECT_ID/IMAGE']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/PROJECT_ID/IMAGE', '--region', 'REGION']
+images:
+- gcr.io/PROJECT_ID/IMAGE
+
+![img_5.png](images/img_5.png)
+
+3. Navigate to your project root directory and run the following command, where REGION is one of the supported build regions to run the build:
+
+ gcloud builds submit --region=REGION
+
+ note: for this project I have selected - asia-south1 
+
+ After successful completion, a success message is displayed along with the URL of the deployed service.
  
-After logging you will see this screen below and start your free trial.
-Write any Company or which one you prefer
+4. Click on the marked URL for the project page:
 
-![image](https://user-images.githubusercontent.com/82671006/162595013-5a509cc9-15db-4e90-b351-05e3127c3f8b.png)
-
-Enter your Mobile Number for Verification
-
- ![image](https://user-images.githubusercontent.com/82671006/162595020-9a96c9d2-9f4c-44fa-9864-3e447e2d61c5.png)
-
-Click on Pivotal Web Services
-
- ![image](https://user-images.githubusercontent.com/82671006/162595024-3adfac50-99a5-4e39-87b9-10c0712d950f.png)
-
-Give any Org name
-
-
-![image](https://user-images.githubusercontent.com/82671006/162595066-6a5634df-d3c4-4bc1-9d74-9f072a05aa2c.png)
-
-
- 
-Now you are inside your Org, and by default, development space is created in your org. You can push your apps here.
-The cloud signup process is done, and the setup is ready for us to push the app.
-
-Previously you have downloaded the CLI.zip file. Unzip the file and install the .exe file with admin rights.
-After a successful installation, you can verify by opening your CMD and type cf. 
-Then you will get a screen which is shown below
- 
-![image](https://user-images.githubusercontent.com/82671006/162595076-0db7fd52-1755-4c32-81b3-771c0ac3d0c8.png)
-
-If you see this screen in your CMD, the installation is successful.
-Now type the command to login via cf-cli
-
-Next, enter your email and password. Now you are ready to push your app.
-Now let’s go to the app which we have built.
- 
-![image](https://user-images.githubusercontent.com/82671006/162595086-b6ad72d0-6a53-4c54-9d80-94b2dd7d3a92.png)
-
-Navigate to the project folder after downloading from the given below link:-
-
-Then write cf push in the terminal.
- 
-![image](https://user-images.githubusercontent.com/82671006/162595090-eaa2d7cb-8a9f-41b9-8039-00e47095f209.png)
-
-After the app is successfully deployed in the cloud, you will see the screen below with the route.
-
-
-![image](https://user-images.githubusercontent.com/82671006/162595094-aaa927e8-9e49-4c23-a2eb-1ecc7a59bd3e.png)
-
-Finally, the app is pushed in the cloud.
-Lets Open Postman and see the result.
-
-![image](https://user-images.githubusercontent.com/82671006/162595101-24a88637-e096-4896-9cc3-2e19eb7c4693.png)
-
-
-
-
-
-ChANGE 1
+![img_6.png](images/img_6.png)

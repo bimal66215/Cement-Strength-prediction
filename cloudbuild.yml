@@ -10,24 +10,16 @@ steps:
     args: ['push', 'gcr.io/cement123/cement_image']
   images: ['gcr.io/cement123/cement_image']
 # Deploy to Cloud Run
- - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'helloworld-${SHORT_SHA}', 
-           '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/myimage:${SHORT_SHA}', 
-           '--region', 'us-central1', '--platform', 'managed', 
-           '--allow-unauthenticated']
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-options:
- logging: GCS_ONLY
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   entrypoint: gcloud
-   args:
-   - 'run'
-   - 'deploy'
-   - 'cement-strength-prediction'
-   - '--image'
-   - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'
-   - '--region'
-   - 'asia-south1'
- images:
- - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   #   entrypoint: gcloud
+   #   args:
+   #   - 'run'
+   #   - 'deploy'
+   #   - 'cement-strength-prediction'
+   #   - '--image'
+   #   - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'
+   #   - '--region'
+   #   - 'asia-south1'
+   # images:
+   # - 'gcr.io/$PROJECT_ID/cement-strength-prediction:$COMMIT_SHA'
+   # # logging

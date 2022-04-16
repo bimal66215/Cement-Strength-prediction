@@ -126,7 +126,7 @@ runtime.txt:- It contains the Python version number.
 
 Before we begin, Enable the Cloud Build, Cloud Run, Container Registry, and Resource Manager APIs using the below link.
 
-![API'S](https://console.cloud.google.com/flows/enableapi?apiid=cloudbuild.googleapis.com,run.googleapis.com,containerregistry.googleapis.com,cloudresourcemanager.googleapis.com&redirect=https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run&_ga=2.81965782.1537123792.1650092035-801238435.1649706278&_gac=1.123866872.1649858458.CjwKCAjwo8-SBhAlEiwAopc9W4BMLp_N90y_KmQaOjfv-L-4gT4WmPlZmenfKocAmQb-wMc_CKQKMhoClKEQAvD_BwE)
+![https://console.cloud.google.com/flows/enableapi?apiid=cloudbuild.googleapis.com,run.googleapis.com,containerregistry.googleapis.com,cloudresourcemanager.googleapis.com&redirect=https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run&_ga=2.81965782.1537123792.1650092035-801238435.1649706278&_gac=1.123866872.1649858458.CjwKCAjwo8-SBhAlEiwAopc9W4BMLp_N90y_KmQaOjfv-L-4gT4WmPlZmenfKocAmQb-wMc_CKQKMhoClKEQAvD_BwE](https://console.cloud.google.com/flows/enableapi?apiid=cloudbuild.googleapis.com,run.googleapis.com,containerregistry.googleapis.com,cloudresourcemanager.googleapis.com&redirect=https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run&_ga=2.81965782.1537123792.1650092035-801238435.1649706278&_gac=1.123866872.1649858458.CjwKCAjwo8-SBhAlEiwAopc9W4BMLp_N90y_KmQaOjfv-L-4gT4WmPlZmenfKocAmQb-wMc_CKQKMhoClKEQAvD_BwE)
 
 Open Cloud Source Repositories from the menu on left 
 

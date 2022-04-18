@@ -370,3 +370,51 @@
 2022-04-17/00:41:37		Entered the load_model method of the File_Operation class
 2022-04-17/00:41:37		Model File RandomForestRegressor2 loaded. Exited the load_model method of the Model_Finder class
 2022-04-17/00:41:37		End of Prediction
+2022-04-18/11:55:09		Start of Validation on files for prediction!!
+2022-04-18/11:55:09		Raw Data Validation Complete!!
+2022-04-18/11:55:09		Creating Prediction_Database and tables on the basis of given schema!!!
+2022-04-18/11:55:10		Table creation Completed!!
+2022-04-18/11:55:10		Insertion of Data into Table started!!!!
+2022-04-18/11:55:26		Insertion in Table completed!!!
+2022-04-18/11:55:26		Deleting Good Data Folder!!!
+2022-04-18/11:55:26		Good_Data folder deleted!!!
+2022-04-18/11:55:26		Moving bad files to Archive and deleting Bad_Data folder!!!
+2022-04-18/11:55:26		Bad files moved to archive!! Bad folder Deleted!!
+2022-04-18/11:55:26		Validation Operation completed!!
+2022-04-18/11:55:26		Extracting csv file from table
+2022-04-18/11:55:26		Start of Prediction
+2022-04-18/11:55:26		Entered the get_data method of the Data_Getter class
+2022-04-18/11:55:26		Data Load Successful.Exited the get_data method of the Data_Getter class
+2022-04-18/11:55:26		Entered the is_null_present method of the Preprocessor class
+2022-04-18/11:55:26		Finding missing values is a success.Data written to the null values file. Exited the is_null_present method of the Preprocessor class
+2022-04-18/11:55:26		Entered the load_model method of the File_Operation class
+2022-04-18/11:55:26		Model File KMeans loaded. Exited the load_model method of the Model_Finder class
+2022-04-18/11:55:26		Entered the find_correct_model_file method of the File_Operation class
+2022-04-18/11:55:26		Exited the find_correct_model_file method of the Model_Finder class.
+2022-04-18/11:55:26		Entered the load_model method of the File_Operation class
+2022-04-18/11:55:26		Model File RandomForestRegressor2 loaded. Exited the load_model method of the Model_Finder class
+2022-04-18/11:55:26		End of Prediction
+2022-04-18/11:56:57		Start of Validation on files for prediction!!
+2022-04-18/11:56:57		Raw Data Validation Complete!!
+2022-04-18/11:56:57		Creating Prediction_Database and tables on the basis of given schema!!!
+2022-04-18/11:56:58		Table creation Completed!!
+2022-04-18/11:56:58		Insertion of Data into Table started!!!!
+2022-04-18/11:57:14		Insertion in Table completed!!!
+2022-04-18/11:57:14		Deleting Good Data Folder!!!
+2022-04-18/11:57:14		Good_Data folder deleted!!!
+2022-04-18/11:57:14		Moving bad files to Archive and deleting Bad_Data folder!!!
+2022-04-18/11:57:14		Bad files moved to archive!! Bad folder Deleted!!
+2022-04-18/11:57:14		Validation Operation completed!!
+2022-04-18/11:57:14		Extracting csv file from table
+2022-04-18/11:57:14		Start of Prediction
+2022-04-18/11:57:14		Entered the get_data method of the Data_Getter class
+2022-04-18/11:57:14		Data Load Successful.Exited the get_data method of the Data_Getter class
+2022-04-18/11:57:14		Entered the is_null_present method of the Preprocessor class
+2022-04-18/11:57:14		Finding missing values is a success.Data written to the null values file. Exited the is_null_present method of the Preprocessor class
+2022-04-18/11:57:14		Entered the load_model method of the File_Operation class
+2022-04-18/11:57:14		Model File KMeans loaded. Exited the load_model method of the Model_Finder class
+2022-04-18/11:57:14		Entered the find_correct_model_file method of the File_Operation class
+2022-04-18/11:57:14		Exited the find_correct_model_file method of the Model_Finder class.
+2022-04-18/11:57:14		Entered the load_model method of the File_Operation class
+2022-04-18/11:57:14		Model File RandomForestRegressor2 loaded. Exited the load_model method of the Model_Finder class
+2022-04-18/11:57:14		End of Prediction

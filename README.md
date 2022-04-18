@@ -184,5 +184,3 @@ steps:
 
 ![img_6.png](images/img_6.png)
 
-
-Thank you 
